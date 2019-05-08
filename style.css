@@ -1,0 +1,12 @@
+/*
+Copyright 2019 Joyce Emanuele, Wellington Cesar
+This file is part of Tradutor de expressões regulares (TdER).
+*/
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+canvas {
+  display: block;
+}
