@@ -47,7 +47,7 @@ function inParaPos(caracter) {
 
 	for (i = 0; i < caracter.length; i++) {
 
-		if (operando(caracter[i]) || caracter[i] == '*') resultado += caracter[i];
+		if (eOperando(caracter[i]) || caracter[i] == '*') resultado += caracter[i];
 		else if (operadoresB.has(caracter[i])) {
 			prioridade = obterPrioridade(caracter[i]);
 			aux = pilha.pop();

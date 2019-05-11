@@ -18,7 +18,7 @@ class Arvore {
 			if (i === expressao.length - 1) {
 				this.raiz = novoNo;
 			}
-			if (operando(expressao[i])) pilha.push(novoNo);
+			if (eOperando(expressao[i])) pilha.push(novoNo);
 			else if (operadoresB.has(expressao[i])) {
 				let ar1 = pilha.pop();
 				let ar2 = pilha.pop();
