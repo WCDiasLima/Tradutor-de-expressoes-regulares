@@ -17,76 +17,19 @@
  along with TdER. If not, see <https://www.gnu.org/licenses/>.
 */
 
-let entrada, saida, AFD, arvore;
+let entrada, saida, arvore, AFNE, AFD;
 
 function setup() {
 	entrada = document.getElementById('er');
 	saida = document.getElementById('det');
 	arvore = new Arvore();
-
-	AFD = {
-		"alfabeto": undefined,
-		"qtdEstados": undefined,
-		"estadoInicial": 0,
-		"estadosFinais": undefined,
-		"delta": undefined
-	};
+	console.log("ε");
+	console.log("∅");
 }
 
 function traduzir() {
 	arvore.insere_expressao(inParaPos(entrada.value));
-	console.log(arvore);
+	AFNE = noParaAFNE(arvore.raiz);
+	AFD = AFNEParaAFD(AFNE);
+	saida.value = JSON.stringify(AFD, null, '\t');
 }
-
-function inParaPos(caracter) {
-
-	var pilha = [];
-	var prioridade = 0;
-	var resultado = "";
-	let i, aux;
-
-	for (i = 0; i < caracter.length; i++) {
-
-		if (eOperando(caracter[i]) || caracter[i] == '*') resultado += caracter[i];
-		else if (operadoresB.has(caracter[i])) {
-			prioridade = obterPrioridade(caracter[i]);
-			aux = pilha.pop();
-			let prioridade2 = obterPrioridade(aux);
-			pilha.push(aux);
-			if (aux !== 'undefined') {
-				while ((pilha.length > 1) && (prioridade2 >= prioridade)) {
-					resultado += pilha.pop();
-				}
-			}
-			pilha.push(caracter[i]);
-		} else if ('(' === caracter[i]) pilha.push(caracter[i]);
-		else if (')' === caracter[i]) {
-			var item = pilha.pop();
-			while ((item != '(') && (item != undefined)) {
-				resultado += item;
-				item = pilha.pop();
-			}
-		}
-	}
-	while (pilha.length > 1) {
-		resultado += pilha.pop();
-	}
-	return resultado;
-}
-
-function eOperando(caracter) {
-	var letras = /^[a-zA-Z]+$/;
-	var numeros = /^[0-9]+$/;
-	if (letras.test(caracter) || numeros.test(caracter)) return true;
-	else return false;
-}
-
-function obterPrioridade(caracter) {
-	var retorno = 0;
-	if ('(' == caracter) retorno = 1;
-	else if ('+' == caracter) retorno = 2;
-	else if ('.' == caracter) retorno = 3;
-	return retorno;
-}
-
-const operadoresB = new Set(['+', '.']);
