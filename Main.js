@@ -29,6 +29,8 @@ function setup() {
 
 function traduzir() {
 	arvore.insere_expressao(inParaPos(entrada.value));
+	inserepontos(arvore.raiz,0,0);
+        denhoarvElinha(arvore.raiz);
 	AFNE = noParaAFNE(arvore.raiz);
 	AFD = AFNEParaAFD(AFNE);
 	saida.value = JSON.stringify(AFD, null, '\t');
