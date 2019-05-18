@@ -60,6 +60,7 @@ function denhoarvElinha(arvore){
    }
   ctx.beginPath();
   ctx.arc(arvore.x, arvore.y, 20, 0, Math.PI * 2)
+  ctx.fillStyle = '#000000'
   ctx.fill()
   ctx.stroke();
   ctx.beginPath();
