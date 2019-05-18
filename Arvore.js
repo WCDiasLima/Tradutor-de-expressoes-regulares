@@ -8,6 +8,8 @@ class No {
 
 class Arvore {
 	constructor() {
+		this.x = null;
+                this.y = null;
 		this.raiz = null;
 	}
 
@@ -33,3 +35,46 @@ class Arvore {
 		}
 	}
 }
+const canvas = document.getElementById("c");
+const ctx = canvas.getContext("2d");
+var iid=0
+var iie=50
+
+function inserepontos(arvore,i,j){
+  arvore.x = (canvas.height/2)+i
+  arvore.y = 50+j
+  iie-=10
+  iid+=10
+	arvore.esquerda && inserepontos(arvore.esquerda,i-iie,j+50)
+	arvore.direita && inserepontos(arvore.direita,i+iid,j+50)
+}
+
+function denhoarvElinha(arvore){
+  if(arvore.esquerda) {
+   ctx.beginPath()
+   ctx.moveTo(arvore.x, arvore.y)
+   ctx.lineWidth = 2;
+   ctx.lineTo(arvore.esquerda.x, arvore.esquerda.y)
+   ctx.stroke()
+   denhoarvElinha(arvore.esquerda)
+   }
+  ctx.beginPath();
+  ctx.arc(arvore.x, arvore.y, 20, 0, Math.PI * 2)
+  ctx.fill()
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.font = "20px Georgia";
+  ctx.fillStyle = '#8ebf42'
+  ctx.fillText(arvore.valor,arvore.x, arvore.y);
+  ctx.fillStyle = '#000000'
+  ctx.stroke();
+  if(arvore.direita) {
+    ctx.beginPath()
+    ctx.moveTo(arvore.x, arvore.y)
+    ctx.lineWidth = 2;
+    ctx.lineTo(arvore.direita.x, arvore.direita.y)
+    ctx.stroke()
+    denhoarvElinha(arvore.direita)
+  }
+} 
+
