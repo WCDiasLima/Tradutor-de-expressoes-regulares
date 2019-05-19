@@ -20,6 +20,19 @@ function noParaAFNE(no) {
 				[]
 			]
 		];
+	} else if (v === '∅') {
+		AFNE.alfabeto = [];
+		AFNE.qtdEstados = 2;
+		AFNE.estadoInicial = [0];
+		AFNE.estadosFinais = [1];
+		AFNE.delta = [
+			[
+				[]
+			],
+			[
+				[]
+			]
+		];
 	} else if (eOperando(v)) {
 		AFNE.alfabeto = [v];
 		AFNE.qtdEstados = 2;

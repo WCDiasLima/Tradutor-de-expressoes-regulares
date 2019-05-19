@@ -37,7 +37,8 @@ function inParaPos(caracter) {
 function eOperando(caracter) {
 	var letras = /^[a-zA-Z]+$/;
 	var numeros = /^[0-9]+$/;
-	if (letras.test(caracter) || numeros.test(caracter) || caracter === 'ε' || caracter === '∅') return true;
+	var simbolo = /^[ε∅]+$/;
+	if (letras.test(caracter) || numeros.test(caracter) || simbolo.test(caracter)) return true;
 	else return false;
 }
 
