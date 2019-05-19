@@ -28,7 +28,14 @@ function setup() {
 }
 
 function traduzir() {
+	ctx.fillStyle = "White";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        iid=0
+        iie=50
+	
 	arvore.insere_expressao(inParaPos(entrada.value));
+	inserepontos(arvore.raiz,0,0);
+        denhoarvElinha(arvore.raiz);
 	AFNE = noParaAFNE(arvore.raiz);
 	AFD = AFNEParaAFD(AFNE);
 	saida.value = JSON.stringify(AFD, null, '\t');
