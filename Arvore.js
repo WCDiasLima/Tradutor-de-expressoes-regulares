@@ -1,8 +1,61 @@
+let globo = new Array(30);
+
 class No {
 	constructor(valor) {
 		this.valor = valor;
 		this.esquerda = null;
 		this.direita = null;
+	}
+
+	mostrar() {
+		if (this.esquerda) {
+			ctx.beginPath();
+			ctx.moveTo(this.x, this.y);
+			ctx.lineWidth = 2;
+			ctx.lineTo(this.esquerda.x, this.esquerda.y);
+			ctx.stroke();
+			this.esquerda.mostrar();
+		}
+		ctx.beginPath();
+		ctx.arc(this.x, this.y, 20, 0, Math.PI * 2);
+		ctx.fillStyle = '#000000';
+		ctx.fill();
+		ctx.stroke();
+		ctx.beginPath();
+		ctx.fillStyle = '#000000';
+		ctx.stroke();
+		if (this.direita) {
+			ctx.beginPath();
+			ctx.moveTo(this.x, this.y);
+			ctx.lineWidth = 2;
+			ctx.lineTo(this.direita.x, this.direita.y);
+			ctx.stroke();
+			this.direita.mostrar();
+		}
+		ctx.font = "20px Georgia";
+		ctx.fillStyle = '#ffffff';
+		ctx.fillText(this.valor, this.x - 6, this.y + 6);
+	}
+	definePos(profundidade) {
+		let esqX, dirX;
+		if (this.esquerda) esqX = this.esquerda.definePos(profundidade + 1);
+		if (this.direita) dirX = this.direita.definePos(profundidade + 1);
+		this.y = profundidade * 50 + 25;
+		if (!esqX && !dirX) this.x = globo[profundidade] + 50;
+		else {
+			if (!esqX) this.x = dirX;
+			else if (!dirX) this.x = esqX;
+			else this.x = (esqX + dirX) / 2;
+			if (this.x < globo[profundidade] + 50) moverX(this, globo[profundidade] + 50 - this.x, true, profundidade);
+		}
+		globo[profundidade] = this.x;
+		return this.x;
+	}
+	moverX(dist, direita, profundidade) {
+		this.x += dist;
+		if (this.esquerda) this.esquerda.moverX(dist, false, profundidade + 1);
+		if (this.direita) this.direita.moverX(dist, true, profundidade + 1);
+		if (direita) globo[profundidade] += dist;
 	}
 }
 
@@ -33,44 +86,15 @@ class Arvore {
 				pilha.push(novoNo);
 			}
 		}
-	}
-}
 
-function definePos(arvore, i, j) {
-	arvore.x = (canvas.height / 2) + i;
-	arvore.y = 50 + j;
-	iie -= 10;
-	iid += 10;
-	arvore.esquerda && definePos(arvore.esquerda, i - iie, j + 50);
-	arvore.direita && definePos(arvore.direita, i + iid, j + 50);
-}
-
-function arv_mostrar(arvore) {
-	if (arvore.esquerda) {
-		ctx.beginPath();
-		ctx.moveTo(arvore.x, arvore.y);
-		ctx.lineWidth = 2;
-		ctx.lineTo(arvore.esquerda.x, arvore.esquerda.y);
-		ctx.stroke();
-		arv_mostrar(arvore.esquerda);
+		globo.fill(0);
+		this.raiz.definePos(0);
 	}
-	ctx.beginPath();
-	ctx.arc(arvore.x, arvore.y, 20, 0, Math.PI * 2);
-	ctx.fillStyle = '#000000';
-	ctx.fill();
-	ctx.stroke();
-	ctx.beginPath();
-	ctx.font = "20px Georgia";
-	ctx.fillStyle = '#8ebf42';
-	ctx.fillText(arvore.valor, arvore.x, arvore.y);
-	ctx.fillStyle = '#000000';
-	ctx.stroke();
-	if (arvore.direita) {
-		ctx.beginPath();
-		ctx.moveTo(arvore.x, arvore.y);
-		ctx.lineWidth = 2;
-		ctx.lineTo(arvore.direita.x, arvore.direita.y);
-		ctx.stroke();
-		arv_mostrar(arvore.direita);
+	mostrar() {
+		canvas.height = windowHeight * 0.65;
+		canvas.width = windowWidth * 0.4;
+		ctx.fillStyle = "White";
+		ctx.fillRect(0, 0, canvas.width, canvas.height);
+		this.raiz.mostrar();
 	}
 }

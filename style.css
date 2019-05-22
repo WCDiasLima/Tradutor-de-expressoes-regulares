@@ -23,7 +23,7 @@ textarea {
 
 textarea#det {
   left: 48%;
-  height: 465px;
+  height: 75%;
   cursor: grab;
 }
 
@@ -48,6 +48,8 @@ input[type=text]:hover {
   position: absolute;
   top: 130px;
   left: 50px;
+  width: 40%;
+  height: 65%;
 }
 
 h3 {
@@ -74,7 +76,7 @@ button {
   margin: 20px 30%;
   width: 36%;
   height: 50px;
-  top: 530px;
+  top: 87%;
 }
 
 h1 {

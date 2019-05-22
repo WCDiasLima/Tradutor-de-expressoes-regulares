@@ -17,30 +17,24 @@
  along with TdER. If not, see <https://www.gnu.org/licenses/>.
 */
 
-let entrada, saida, canvas, ctx, arvore, AFNE, AFD, iid, iie;
+let entrada, saida, canvas, ctx, arvore, AFNE, AFD;
 
 function setup() {
 	entrada = document.getElementById('er');
 	saida = document.getElementById('det');
-	arvore = new Arvore();
-
 	canvas = document.getElementById("c");
+
+	arvore = new Arvore();
 	ctx = canvas.getContext("2d");
-	iid = 0;
-	iie = 50;
 
 	console.log("ε");
 	console.log("∅");
 }
 
 function traduzir() {
-	ctx.fillStyle = "White";
-	ctx.fillRect(0, 0, canvas.width, canvas.height);
-	iid = 0;
-	iie = 50;
 	arvore.insere_expressao(inParaPos(entrada.value));
-	definePos(arvore.raiz, 0, 0);
-	arv_mostrar(arvore.raiz);
+	arvore.mostrar(arvore.raiz);
+
 	AFNE = noParaAFNE(arvore.raiz);
 	AFD = AFNEParaAFD(AFNE);
 	saida.value = JSON.stringify(AFD, null, '\t');
