@@ -19,21 +19,19 @@
 
 let entrada, saida, canvas, ctx, arvore, AFNE, AFD;
 
-function setup() {
-	entrada = document.getElementById('er');
-	saida = document.getElementById('det');
-	canvas = document.getElementById("c");
+entrada = document.getElementById('er');
+saida = document.getElementById('det');
+canvas = document.getElementById("c");
 
-	arvore = new Arvore();
-	ctx = canvas.getContext("2d");
+arvore = new Arvore();
+ctx = canvas.getContext("2d");
 
-	console.log("ε");
-	console.log("∅");
-}
+console.log("ε");
+console.log("∅");
 
 function traduzir() {
 	arvore.insere_expressao(inParaPos(entrada.value));
-	arvore.mostrar(arvore.raiz);
+	arvore.mostrar();
 
 	AFNE = noParaAFNE(arvore.raiz);
 	AFD = AFNEParaAFD(AFNE);

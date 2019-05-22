@@ -9,18 +9,10 @@ This file is part of Tradutor de expressões regulares (TdER).
     <meta charset="utf-8">
     <title>TdER - por JE e WC</title>
     <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.dom.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.sound.min.js"></script>
   </head>
   <body>
     <h3>Árvore:</h3>
     <canvas id="c"> </canvas>
-    <script src="AFD.js"></script>
-    <script src="AFNE.js"></script>
-    <script src="Main.js"></script>
-    <script src="Arvore.js"></script>
-    <script src="Expressão.js"></script>
     <form id="caixas" name="caixa">
       <h1>Expressão regular:</h1>
       <text> <input type="text" id="er"> </text>
@@ -28,5 +20,10 @@ This file is part of Tradutor de expressões regulares (TdER).
       <textarea id="det" readonly></textarea>
     </form>
     <button id="but" onclick="return traduzir()" type="submit">TRADUZIR</button>
+    <script src="Expressão.js"></script>
+    <script src="Arvore.js"></script>
+    <script src="AFNE.js"></script>
+    <script src="AFD.js"></script>
+    <script src="Main.js"></script>
   </body>
 </html>

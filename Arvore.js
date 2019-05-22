@@ -1,4 +1,4 @@
-let globo = new Array(30);
+let deslocX = new Array(30);
 
 class No {
 	constructor(valor) {
@@ -41,21 +41,21 @@ class No {
 		if (this.esquerda) esqX = this.esquerda.definePos(profundidade + 1);
 		if (this.direita) dirX = this.direita.definePos(profundidade + 1);
 		this.y = profundidade * 50 + 25;
-		if (!esqX && !dirX) this.x = globo[profundidade] + 50;
+		if (!esqX && !dirX) this.x = deslocX[profundidade] + 50;
 		else {
 			if (!esqX) this.x = dirX;
 			else if (!dirX) this.x = esqX;
 			else this.x = (esqX + dirX) / 2;
-			if (this.x < globo[profundidade] + 50) moverX(this, globo[profundidade] + 50 - this.x, true, profundidade);
+			if (this.x < deslocX[profundidade] + 50) this.moverX(deslocX[profundidade] + 50 - this.x, true, profundidade);
 		}
-		globo[profundidade] = this.x;
+		deslocX[profundidade] = this.x;
 		return this.x;
 	}
 	moverX(dist, direita, profundidade) {
 		this.x += dist;
 		if (this.esquerda) this.esquerda.moverX(dist, false, profundidade + 1);
 		if (this.direita) this.direita.moverX(dist, true, profundidade + 1);
-		if (direita) globo[profundidade] += dist;
+		if (direita) deslocX[profundidade] += dist;
 	}
 }
 
@@ -87,12 +87,12 @@ class Arvore {
 			}
 		}
 
-		globo.fill(0);
+		deslocX.fill(0);
 		this.raiz.definePos(0);
 	}
 	mostrar() {
-		canvas.height = windowHeight * 0.65;
-		canvas.width = windowWidth * 0.4;
+		canvas.height = window.innerHeight * 0.65;
+		canvas.width = window.innerWidth * 0.4;
 		ctx.fillStyle = "White";
 		ctx.fillRect(0, 0, canvas.width, canvas.height);
 		this.raiz.mostrar();
